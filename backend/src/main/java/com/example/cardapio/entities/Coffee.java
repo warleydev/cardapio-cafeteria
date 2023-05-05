@@ -2,14 +2,12 @@ package com.example.cardapio.entities;
 
 import com.example.cardapio.dto.CoffeeRequestDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity(name = "coffees")
 @Table(name = "coffees")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

@@ -22,11 +22,29 @@ public class CoffeeController {
         return coffees;
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "x")
-    @PostMapping()
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping
     public void saveCoffee(@RequestBody CoffeeRequestDTO coffee){
         Coffee newCoffee = new Coffee(coffee);
         repository.save(newCoffee);
         return;
+    }
+
+    @PutMapping(value="/{id}")
+    public Coffee update(@PathVariable Long id, @RequestBody Coffee coffee){
+        try {
+            Coffee entity = repository.getReferenceById(id);
+            updateData(entity, coffee);
+            return repository.save(entity);
+        } catch(RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
+
+    private void updateData(Coffee coffee, Coffee newData) {
+        coffee.setPrice(newData.getPrice());
+        coffee.setTitle(newData.getTitle());
+        coffee.setImage(newData.getImage());
     }
 }
